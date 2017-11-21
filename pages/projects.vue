@@ -20,6 +20,13 @@
       let projects = await app.$axios.$get('http://jenssen.kolter.it/wp-json/wp/v2/posts?_embed&fields=wp:attachment')
       return { projects: projects }
     },
+    created () {
+      this.$axios.$get('http://jenssen.kolter.it/wp-json/wp/v2/posts?_embed&fields=wp:attachment').then(
+        projects => {
+          this.projects = projects
+        }
+      )
+    },
     methods: {
       onLoaded () {
         console.log('onLoaded')
