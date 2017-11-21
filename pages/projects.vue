@@ -17,7 +17,7 @@
       }
     },
     async asyncData ({ app, store, params }) {
-      let projects = await app.$axios.$get('http://jenssen.kolter.it/wp-json/wp/v2/posts?_embed&fields=wp:attachment')
+      let projects = await app.$axios.$get('http://jenssen.kolter.it/wp/wp-json/wp/v2/posts')
       return { projects: projects }
     },
     created () {
