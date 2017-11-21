@@ -21,7 +21,7 @@
       return { projects: projects }
     },
     created () {
-      this.$axios.$get('http://jenssen.kolter.it/wp-json/wp/v2/posts?_embed&fields=wp:attachment').then(
+      this.$axios.$get('http://jenssen.kolter.it/wp/wp-json/wp/v2/posts').then(
         projects => {
           this.projects = projects
         }
