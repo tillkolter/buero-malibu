@@ -4,7 +4,6 @@
       <div>
         B&uuml;ro <br/>
         Malibu
-
       </div>
     </nuxt-link>
     <div ref="sectionHeader" :style="headerStyle" class="section-header">{{currentSection}}</div>
@@ -12,7 +11,6 @@
 </template>
 
 <script>
-  //  import { mapGetters } from 'vuex'
   export default {
     name: 'Logo',
     data () {
@@ -46,32 +44,40 @@
     methods: {
       handleRoute (route) {
         let rect = this.currentSectionRect
-        let logo = this.$refs['logo'].$el
         if (this.$route.name === 'index') {
+          this.$store.commit('SET_CURRENT_TARGET', '')
           this.logoStyle = ''
-          this.headerStyle.visibility = 'hidden'
+          // this.headerStyle.visibility = 'hidden'
+          this.headerStyle.opacity = 0
           if (rect && rect.left && rect.right) {
             this.headerStyle.left = `${rect.left}px`
             this.headerStyle.top = `${rect.top}px`
           }
         } else {
-          let logoRect = logo.getBoundingClientRect()
+          let logoRect = this.$store.state.logoRect
           this.logoStyle = {
             fontSize: '24px',
             paddingTop: '8px',
             width: `${logoRect.width - 60}px`
           }
           this.headerStyle = {
-            visibility: 'visible',
+            opacity: 1,
+            // visibility: 'visible',
             position: 'absolute',
             left: `${logoRect.right - 30}px`,
             top: `${logoRect.top + (logoRect.height / 10)}px`
           }
+          let header = this.$refs.sectionHeader
+          header.style.left = `${logoRect.right - 30}px`
+          header.style.top = `${logoRect.top + (logoRect.height / 10)}px`
+          console.log('sa;da;k')
         }
       }
     },
     mounted () {
       this.handleRoute(this.$route)
+      let logo = this.$refs.logo.$el
+      this.$store.commit('SET_LOGO_RECT', logo.getBoundingClientRect())
     }
   }
 </script>
@@ -97,7 +103,7 @@
 
   .section-header {
     font-size: 20px;
-    transition: left 1s, top 1s;
+    transition: left 1s, top 1s, opacity 0.5s ease-in-out;
     z-index: 10;
     position: absolute;
   }

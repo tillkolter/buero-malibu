@@ -1,18 +1,18 @@
 <template>
   <div>
     <div class="main-icons">
-      <nuxt-link @mouseover.self.native="onLinkHover" @click.native="onLinkClick($event, 'Projects')" class="main-icon" :to="{name: 'projects'}">
+      <div id="projects-link" @mouseover.self="onLinkHover" @click="onLinkClick($event, 'Projects')" class="main-icon">
         <img src="../assets/images/ic_build_white_48px.svg" />
         <div class="main-icon-title" ref="projects-title">Projects</div>
-      </nuxt-link>
+      </div>
       <div @click.prevent="onOpenGallery" class="main-icon highlight">
         <img src="../assets/images/ic_theaters_white_48px.svg" />
         <div class="main-icon-title">Selected works</div>
       </div>
-      <nuxt-link @mouseover.self.native="onLinkHover" @click.native="onLinkClick($event, 'Contact')" :to="{name: 'contact'}" class="main-icon">
+      <div id="contact-link" @mouseover.self="onLinkHover" @click="onLinkClick($event, 'Contact')" class="main-icon">
         <img src="../assets/images/ic_call_white_48px.svg" />
         <div class="main-icon-title" ref="contact-title">Contact</div>
-      </nuxt-link>
+      </div>
     </div>
     <photo-swipe></photo-swipe>
   </div>
@@ -38,6 +38,27 @@
       },
       onLinkHover (e) {
         let target = e.currentTarget
+        if (target.id !== this.$store.state.currentTarget) {
+          this.$store.commit('SET_CURRENT_TARGET', target.id)
+          let projectsTitle
+          for (var i = 0; i < target.childNodes.length; i++) {
+            if (target.childNodes[i].className === 'main-icon-title') {
+              projectsTitle = target.childNodes[i]
+              break
+            }
+          }
+          if (projectsTitle) {
+            let rect = projectsTitle.getBoundingClientRect()
+            if (rect) {
+              this.$store.commit('SET_HEADER_POSITION', rect)
+            }
+          }
+        }
+      },
+      onLinkClick (e, sectionTitle) {
+        console.log('click link')
+        this.$store.commit('SET_SECTION', sectionTitle)
+        let target = e.currentTarget
         let projectsTitle
         for (var i = 0; i < target.childNodes.length; i++) {
           if (target.childNodes[i].className === 'main-icon-title') {
@@ -47,26 +68,9 @@
         }
         if (projectsTitle) {
           let rect = projectsTitle.getBoundingClientRect()
-          if (rect) {
-            this.$store.commit('SET_HEADER_POSITION', rect)
-          }
+          this.$store.commit('SET_HEADER_POSITION', rect)
         }
-      },
-      onLinkClick (e, sectionTitle) {
-        console.log('click link')
-        this.$store.commit('SET_SECTION', sectionTitle)
-        //        let target = e.currentTarget
-        //        let projectsTitle
-        //        for (var i = 0; i < target.childNodes.length; i++) {
-        //          if (target.childNodes[i].className === 'main-icon-title') {
-        //            projectsTitle = target.childNodes[i]
-        //            break
-        //          }
-        //        }
-        //        if (projectsTitle) {
-        //          let rect = projectsTitle.getBoundingClientRect()
-        //          this.$store.commit('SET_HEADER_POSITION', rect)
-        //        }
+        this.$router.push({name: sectionTitle.toLowerCase()})
       }
     }
   }
