@@ -1,9 +1,18 @@
 <template>
   <div>
     <div class="main-icons">
-      <nuxt-link class="main-icon" :to="{name: 'projects'}"><img src="../assets/images/ic_build_white_48px.svg" /></nuxt-link>
-      <div @click.prevent="onOpenGallery" class="main-icon highlight"><img src="../assets/images/ic_theaters_white_48px.svg" /></div>
-      <div class="main-icon"><img src="../assets/images/ic_call_white_48px.svg" /></div>
+      <nuxt-link @mouseover.self.native="onLinkHover" @click.native="onLinkClick($event, 'Projects')" class="main-icon" :to="{name: 'projects'}">
+        <img src="../assets/images/ic_build_white_48px.svg" />
+        <div class="main-icon-title" ref="projects-title">Projects</div>
+      </nuxt-link>
+      <div @click.prevent="onOpenGallery" class="main-icon highlight">
+        <img src="../assets/images/ic_theaters_white_48px.svg" />
+        <div class="main-icon-title">Selected works</div>
+      </div>
+      <nuxt-link @mouseover.self.native="onLinkHover" @click.native="onLinkClick($event, 'Contact')" :to="{name: 'contact'}" class="main-icon">
+        <img src="../assets/images/ic_call_white_48px.svg" />
+        <div class="main-icon-title" ref="contact-title">Contact</div>
+      </nuxt-link>
     </div>
     <photo-swipe></photo-swipe>
   </div>
@@ -26,6 +35,38 @@
     methods: {
       onOpenGallery (e) {
         openPhotoSwipe(this.$store, e.currentTarget)
+      },
+      onLinkHover (e) {
+        let target = e.currentTarget
+        let projectsTitle
+        for (var i = 0; i < target.childNodes.length; i++) {
+          if (target.childNodes[i].className === 'main-icon-title') {
+            projectsTitle = target.childNodes[i]
+            break
+          }
+        }
+        if (projectsTitle) {
+          let rect = projectsTitle.getBoundingClientRect()
+          if (rect) {
+            this.$store.commit('SET_HEADER_POSITION', rect)
+          }
+        }
+      },
+      onLinkClick (e, sectionTitle) {
+        console.log('click link')
+        this.$store.commit('SET_SECTION', sectionTitle)
+        //        let target = e.currentTarget
+        //        let projectsTitle
+        //        for (var i = 0; i < target.childNodes.length; i++) {
+        //          if (target.childNodes[i].className === 'main-icon-title') {
+        //            projectsTitle = target.childNodes[i]
+        //            break
+        //          }
+        //        }
+        //        if (projectsTitle) {
+        //          let rect = projectsTitle.getBoundingClientRect()
+        //          this.$store.commit('SET_HEADER_POSITION', rect)
+        //        }
       }
     }
   }
@@ -79,8 +120,29 @@
       display: flex;
       justify-content: center;
       cursor: pointer;
+      position: relative;
+      img {
+        transition: all .3s;
+        width: 48px;
+      }
+      &-title {
+        position: absolute;
+        padding: 16px;
+        right: 0;
+        bottom: 0;
+        display: none;
+      }
       &:hover {
         background-color: #FFD63D;
+        .main-icon-title {
+          display: inherit;
+          color: #154C1D;
+          text-transform: uppercase;
+        }
+        img {
+          width: 120px;
+          transform: rotate(467deg);
+        }
       }
       &.highlight {
         margin-top: -8px

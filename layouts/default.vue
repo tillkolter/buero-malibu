@@ -36,6 +36,7 @@
   }
 
   body {
+    font-family: "Comic Sans MS", cursive, sans-serif;
     height: 100%;
   }
 

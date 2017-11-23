@@ -1,33 +1,71 @@
 <template>
-  <nuxt-link to="/" :style="logoStyle" class="buero-malibu-logo">
-    <div>
-      B&uuml;ro <br/>
-      Malibu
-    </div>
-  </nuxt-link>
+  <div>
+    <nuxt-link ref="logo" to="/" :style="logoStyle" class="buero-malibu-logo">
+      <div>
+        B&uuml;ro <br/>
+        Malibu
+
+      </div>
+    </nuxt-link>
+    <div ref="sectionHeader" :style="headerStyle" class="section-header">{{currentSection}}</div>
+  </div>
 </template>
 
 <script>
+  //  import { mapGetters } from 'vuex'
   export default {
     name: 'Logo',
     data () {
       return {
-        logoStyle: ''
+        logoStyle: {},
+        headerStyle: {}
       }
     },
     watch: {
       $route (value) {
         this.handleRoute(value)
+      },
+      currentSectionRect (value) {
+        if (value) {
+          this.headerStyle.left = `${value.left}px`
+          this.headerStyle.top = `${value.top}px`
+          let header = this.$refs.sectionHeader
+          header.style.left = `${value.left}px`
+          header.style.top = `${value.top}px`
+        }
+      }
+    },
+    computed: {
+      currentSectionRect () {
+        return this.$store.state.currentSectionRect
+      },
+      currentSection () {
+        return this.$store.state.currentSection
       }
     },
     methods: {
       handleRoute (route) {
+        let rect = this.currentSectionRect
+        let logo = this.$refs['logo'].$el
         if (this.$route.name === 'index') {
           this.logoStyle = ''
+          this.headerStyle.visibility = 'hidden'
+          if (rect && rect.left && rect.right) {
+            this.headerStyle.left = `${rect.left}px`
+            this.headerStyle.top = `${rect.top}px`
+          }
         } else {
+          let logoRect = logo.getBoundingClientRect()
           this.logoStyle = {
             fontSize: '24px',
-            paddingTop: '8px'
+            paddingTop: '8px',
+            width: `${logoRect.width - 60}px`
+          }
+          this.headerStyle = {
+            visibility: 'visible',
+            position: 'absolute',
+            left: `${logoRect.right - 30}px`,
+            top: `${logoRect.top + (logoRect.height / 10)}px`
           }
         }
       }
@@ -48,7 +86,6 @@
     width: 100%;
     padding-top: 120px;
     margin-bottom: 32px;
-    font-family: "Comic Sans MS", cursive, sans-serif;
     text-decoration: none;
     max-width: 300px;
     margin-left: auto;
@@ -56,6 +93,13 @@
     &:hover {
       color: #80593C;
     }
+  }
+
+  .section-header {
+    font-size: 20px;
+    transition: left 1s, top 1s;
+    z-index: 10;
+    position: absolute;
   }
 
   .VueToNuxtLogo {

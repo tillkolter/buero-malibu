@@ -49,18 +49,13 @@ export const openPhotoSwipe = function (store, element) {
         }
 
         let bgElement = document.getElementById('pswp__bg')
-        // let sheet = document.createElement('style')
 
         let elementStyle = window.getComputedStyle(element)
         bgElement.style.backgroundColor = elementStyle.backgroundColor
 
-        console.log(JSON.stringify(element))
-        console.log(`background color: ${bgElement.style.backgroundColor} ${elementStyle.backgroundColor}`)
         var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUIDefault, items, options)
-        // console.log(JSON.stringify(items))
         gallery.init()
       }
-      console.log('image loaded')
     }
     img.src = src
   }

@@ -1,9 +1,13 @@
 export const state = () => ({
-  counter: 0
+  currentSection: '',
+  currentSectionRect: {}
 })
 
 export const mutations = {
-  increment (state) {
-    state.counter++
+  SET_SECTION (state, section) {
+    state.currentSection = section
+  },
+  SET_HEADER_POSITION (state, rect) {
+    state.currentSectionRect = rect
   }
 }
