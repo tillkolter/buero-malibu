@@ -8,7 +8,10 @@
 
 <script>
   export default {
-    name: 'contact'
+    name: 'contact',
+    mounted () {
+      this.$store.commit('SET_SECTION', 'Contact')
+    }
   }
 </script>
 

@@ -75,9 +75,9 @@
       }
     },
     mounted () {
-      this.handleRoute(this.$route)
       let logo = this.$refs.logo.$el
       this.$store.commit('SET_LOGO_RECT', logo.getBoundingClientRect())
+      this.handleRoute(this.$route)
     }
   }
 </script>

@@ -25,6 +25,9 @@
     created () {
       this.$store.dispatch('wordpress/fetchPosts')
     },
+    mounted () {
+      this.$store.commit('SET_SECTION', 'Projects')
+    },
     methods: {
       onLoaded () {
         this.projectListStyle = {
