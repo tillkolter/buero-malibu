@@ -99,11 +99,20 @@
     padding-top: 15px;
   }
 
-  .page-enter-active, .page-leave-active {
+  .page-enter-active {
     transition: opacity .8s
   }
 
-  .page-enter, .page-leave-active {
+
+  .page-leave-active {
+    transition: opacity .8s
+  }
+
+  .page-enter-to {
+    opacity: 1;
+  }
+
+  .page-enter, .page-leave-to, .page-leave-active {
     opacity: 0
   }
 
