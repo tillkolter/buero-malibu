@@ -13,23 +13,20 @@
       return {
         projectListStyle: {
           opacity: 0
-        }
+        },
+        projects: ''
       }
     },
-    async asyncData ({ app, store, params }) {
+    async asyncData ({app, store, params}) {
       let projects = await app.$axios.$get('http://jenssen.kolter.it/wp/wp-json/wp/v2/posts')
-      return { projects: projects }
+      store.commit('wordpress/SET_PROJECTS', projects)
+      return {projects: projects}
     },
     created () {
-      this.$axios.$get('http://jenssen.kolter.it/wp/wp-json/wp/v2/posts').then(
-        projects => {
-          this.projects = projects
-        }
-      )
+      this.$store.dispatch('wordpress/fetchPosts')
     },
     methods: {
       onLoaded () {
-        console.log('onLoaded')
         this.projectListStyle = {
           opacity: 1
         }

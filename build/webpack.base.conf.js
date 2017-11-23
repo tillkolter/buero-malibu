@@ -43,7 +43,7 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@': resolve('assets'),
       'masonry': 'masonry-layout',
       'isotope': 'isotope-layout'
     }

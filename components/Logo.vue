@@ -1,8 +1,10 @@
 <template>
-  <div :style="logoStyle" class="buero-malibu-logo" x="0" y="15" fill="red">
-    B&uuml;ro <br/>
-    Malibu
-  </div>
+  <nuxt-link to="/" :style="logoStyle" class="buero-malibu-logo">
+    <div>
+      B&uuml;ro <br/>
+      Malibu
+    </div>
+  </nuxt-link>
 </template>
 
 <script>
@@ -25,7 +27,7 @@
         } else {
           this.logoStyle = {
             fontSize: '24px',
-            marginTop: '56px'
+            paddingTop: '8px'
           }
         }
       }
@@ -36,14 +38,24 @@
   }
 </script>
 
-<style>
+<style lang="scss">
   .buero-malibu-logo {
+    display: block;
     font-size: 72px;
     color: #3b8070;
     transition: all 1s;
     text-align: center;
     width: 100%;
-    margin-top: 200px;
+    padding-top: 120px;
+    margin-bottom: 32px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-decoration: none;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    &:hover {
+      color: #80593C;
+    }
   }
 
   .VueToNuxtLogo {
@@ -52,7 +64,7 @@
     transform: rotateX(180deg);
     position: relative;
     overflow: hidden;
-    height: 180px;
+    height: 160px;
     width: 245px;
   }
 

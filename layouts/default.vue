@@ -1,19 +1,7 @@
 <template>
   <div>
     <logo></logo>
-    <nuxt/>
-    <nav class="navigation">
-      <ul class="navbar">
-        <li class="navbar-item">
-          <nuxt-link to="/">Home</nuxt-link>
-        </li>
-        <li class="navbar-item">
-          <nuxt-link :to="{name: 'projects'}">Projects</nuxt-link>
-        </li>
-        <li class="navbar-item"><a href="#">Contact</a></li>
-        <li class="navbar-item"><a href="#">Selected</a></li>
-      </ul>
-    </nav>
+    <nuxt />
   </div>
 </template>
 
@@ -26,6 +14,15 @@
 </script>
 
 <style lang="scss">
+
+  .container {
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
   html {
     font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     font-size: 16px;
@@ -35,6 +32,11 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     box-sizing: border-box;
+    height: 100%;
+  }
+
+  body {
+    height: 100%;
   }
 
   *, *:before, *:after {
