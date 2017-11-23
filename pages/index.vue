@@ -2,7 +2,7 @@
   <div>
     <div class="main-icons">
       <nuxt-link class="main-icon" :to="{name: 'projects'}"><img src="../assets/images/ic_build_white_48px.svg" /></nuxt-link>
-      <div @click="onOpenGallery" class="main-icon highlight"><img src="../assets/images/ic_theaters_white_48px.svg" /></div>
+      <div @click.prevent="onOpenGallery" class="main-icon highlight"><img src="../assets/images/ic_theaters_white_48px.svg" /></div>
       <div class="main-icon"><img src="../assets/images/ic_call_white_48px.svg" /></div>
     </div>
     <photo-swipe></photo-swipe>
@@ -11,7 +11,7 @@
 
 <script>
   import Logo from '~/components/Logo.vue'
-  import {onOpenGallery} from '~/utils/gallery'
+  import {openPhotoSwipe} from '~/utils/gallery'
   import PhotoSwipe from '../components/PhotoSwipe'
 
   export default {
@@ -25,9 +25,7 @@
     },
     methods: {
       onOpenGallery (e) {
-        let target = e.target
-        console.log(`This target ${JSON.stringify(target)}`)
-        onOpenGallery(this.$store, target)
+        openPhotoSwipe(this.$store, e.currentTarget)
       }
     }
   }

@@ -65,7 +65,3 @@ export const openPhotoSwipe = function (store, element) {
     img.src = src
   }
 }
-
-export const onOpenGallery = function (store, element) {
-  openPhotoSwipe(store, element)
-}
