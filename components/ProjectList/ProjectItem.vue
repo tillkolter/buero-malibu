@@ -118,6 +118,7 @@
     &-image {
       height: auto;
       width: 300px;
+      display: block;
     }
     &-date {
       margin-top: auto;
