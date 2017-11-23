@@ -62,6 +62,12 @@
           opacity: 0.8;
           background-color: #204671;
         }
+        .project-item-bottom {
+          visibility: visible;
+        }
+        .project-title {
+          visibility: visible;
+        }
       }
       &-content {
         position: absolute;
@@ -96,12 +102,14 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        visibility: hidden;
       }
     }
     &-title {
       padding: 16px;
       font-weight: bold;
       position: absolute;
+      visibility: hidden;
     }
     &-venue {
       display: flex;
