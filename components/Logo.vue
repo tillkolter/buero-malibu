@@ -93,6 +93,7 @@
     padding-top: 120px;
     margin-bottom: 32px;
     text-decoration: none;
+    text-transform: uppercase;
     max-width: 300px;
     margin-left: auto;
     margin-right: auto;
@@ -106,6 +107,7 @@
     transition: left 1s, top 1s, opacity 0.5s ease-in-out;
     z-index: 10;
     position: absolute;
+    text-transform: uppercase;
   }
 
   .VueToNuxtLogo {
