@@ -41,10 +41,14 @@
     },
     methods: {
       getMonthYear (dateString) {
-        let year = parseInt(dateString.slice(0, 4))
-        let month = parseInt(dateString.slice(4, 6))
-        let day = parseInt(dateString.slice(6))
-        return getMonthYear(new Date(year, month, day))
+        if (dateString && dateString.length === 8) {
+          let year = parseInt(dateString.slice(0, 4))
+          let month = parseInt(dateString.slice(4, 6))
+          let day = parseInt(dateString.slice(6))
+          return getMonthYear(new Date(year, month, day))
+        } else {
+          return ''
+        }
       },
       startTouch () {
         this.isTouch = true
