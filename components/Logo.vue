@@ -2,7 +2,7 @@
   <div>
     <nuxt-link ref="logo" to="/" :style="logoStyle" class="buero-malibu-logo">
       <div>
-        B&uuml;ro <br/>
+        B&uuml;ro<br/>
         Malibu
       </div>
     </nuxt-link>

@@ -1,5 +1,5 @@
 <template>
-  <div class="project-item">
+  <div @touchstart="startTouch" @touchend="endTouch" :class="['project-item', isTouch ? 'touch': '']">
     <figure style="position: relative">
       <img style="width: 300px;" class="project-image" :src="image" v-for="image in images" />
     </figure>
@@ -29,6 +29,11 @@
   export default {
     name: 'ProjectItem',
     props: ['project'],
+    data () {
+      return {
+        isTouch: false
+      }
+    },
     computed: {
       images () {
         return this.project.images
@@ -40,6 +45,12 @@
         let month = parseInt(dateString.slice(4, 6))
         let day = parseInt(dateString.slice(6))
         return getMonthYear(new Date(year, month, day))
+      },
+      startTouch () {
+        this.isTouch = true
+      },
+      endTouch () {
+        this.isTouch = false
       }
     }
   }
@@ -57,7 +68,7 @@
       margin: 5px;
       position: relative;
       color: #fff;
-      &:hover {
+      &:hover, &:active, &:focus, .touched {
         .project-item-content-inner:before {
           opacity: 0.8;
           background-color: #204671;

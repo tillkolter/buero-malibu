@@ -7,9 +7,13 @@
 
 <script>
   import Logo from '../components/Logo'
+  import { isMobileOrTablet } from '../utils/mobile'
   export default {
     name: 'default',
-    components: {Logo}
+    components: {Logo},
+    mounted () {
+      this.$store.commit('SET_MOBILE', isMobileOrTablet())
+    }
   }
 </script>
 

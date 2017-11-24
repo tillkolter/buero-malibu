@@ -1,16 +1,18 @@
 <template>
   <div>
     <div class="main-icons">
-      <div id="projects-link" @mouseover.self="onLinkHover" @click="onLinkClick($event, 'Projects')" class="main-icon">
-        <img src="../assets/images/ic_build_white_48px.svg" />
+      <div id="projects-link" @mouseover.self="onLinkHover" @touchend="onLinkClick($event, 'Projects')"
+           @click="onLinkClick($event, 'Projects')" :class="['main-icon']">
+        <img src="../assets/images/ic_build_white_48px.svg"/>
         <div class="main-icon-title" ref="projects-title">Projects</div>
       </div>
-      <div @click.prevent="onOpenGallery" class="main-icon highlight">
-        <img src="../assets/images/ic_theaters_white_48px.svg" />
+      <div @touchend="onOpenGallery" @click.prevent="onOpenGallery" class="main-icon highlight">
+        <img src="../assets/images/ic_theaters_white_48px.svg"/>
         <div class="main-icon-title">Selected works</div>
       </div>
-      <div id="contact-link" @mouseover.self="onLinkHover" @click="onLinkClick($event, 'Contact')" class="main-icon">
-        <img src="../assets/images/ic_call_white_48px.svg" />
+      <div id="contact-link" @mouseover.self="onLinkHover" @touchend="onLinkClick($event, 'Projects')"
+           @click="onLinkClick($event, 'Contact')" class="main-icon">
+        <img src="../assets/images/ic_call_white_48px.svg"/>
         <div class="main-icon-title" ref="contact-title">Contact</div>
       </div>
     </div>
@@ -20,7 +22,7 @@
 
 <script>
   import Logo from '~/components/Logo.vue'
-  import {openPhotoSwipe} from '~/utils/gallery'
+  import { openPhotoSwipe } from '~/utils/gallery'
   import PhotoSwipe from '../components/PhotoSwipe'
 
   export default {
@@ -103,7 +105,6 @@
     transition: opacity .8s
   }
 
-
   .page-leave-active {
     transition: opacity .8s
   }
@@ -145,7 +146,7 @@
         bottom: 0;
         display: none;
       }
-      &:hover {
+      &:hover, &:active, &:focus {
         background-color: #FFD63D;
         .main-icon-title {
           display: inherit;

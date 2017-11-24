@@ -2,7 +2,8 @@ export const state = () => ({
   currentSection: '',
   currentSectionRect: {},
   logoRect: undefined,
-  currentTarget: undefined
+  currentTarget: undefined,
+  isMobile: false
 })
 
 export const mutations = {
@@ -17,5 +18,8 @@ export const mutations = {
   },
   SET_CURRENT_TARGET (state, element) {
     state.currentTarget = element
+  },
+  SET_MOBILE (state, isMobile) {
+    state.isMobile = isMobile
   }
 }

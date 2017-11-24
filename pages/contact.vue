@@ -1,7 +1,7 @@
 <template>
   <div id="contact">
     <div>
-      Phone: 0169 / 361 666 69
+      Phone: 0169&nbsp;/&nbsp;361&nbsp;666&nbsp;69
     </div>
   </div>
 </template>
